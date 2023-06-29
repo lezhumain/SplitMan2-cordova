@@ -18,11 +18,6 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-- group: var_groupe
-- name: IMAGE
-  value: splitman2
-
 stages:
   - stage: Generate_APK_base
     jobs:
@@ -30,10 +25,10 @@ stages:
         steps:
           - checkout: self
 
-          - script: |
-              npm ci -f
-              npm run build:prod
-            displayName: 'build'
+#          - script: |
+#              npm ci -f
+#              npm run build:prod
+#            displayName: 'build'
 
           - script: |
               docker build -t splitman2androidbase -f Dockerfile_android .

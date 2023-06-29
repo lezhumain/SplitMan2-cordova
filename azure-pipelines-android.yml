@@ -36,6 +36,10 @@ stages:
 
           - script: |
               zip -r cordova_react_test.zip .
+              
+              mkdir -p dist/SplitMan2
+              echo "hello" > dist/SplitMan2/index.html
+
               docker build -t splitman2android -f Dockerfile_android1 .
 
               id=$(docker create splitman2android)

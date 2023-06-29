@@ -20,5 +20,7 @@ RUN export PATH="$PATH:$(cat /path_add_1):$(cat /path_add_2)" && export ANDROID_
     && mkdir -p /app/dist/SplitMan21 \
     && bash /app/buildCordovaApp.sh "SplitMan2"
 
+CMD export PATH="$PATH:$(cat /path_add_1):$(cat /path_add_2)" && export ANDROID_HOME="/root/android/sdk" \
+    && bash /app/buildCordovaApp.sh "SplitMan2"
 
 #docker build -t splitman2android -f Dockerfile_android1 .

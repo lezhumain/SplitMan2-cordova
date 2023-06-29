@@ -1,0 +1,24 @@
+FROM splitman2androidbase
+
+WORKDIR /temp
+
+COPY . /temp
+RUN cd /temp && dos2unix *.sh && chmod +x *.sh && zip -r /cordova_react_test.zip .
+
+
+WORKDIR /app
+
+COPY ./prepare_android.sh .
+RUN mv /cordova_react_test.zip /app/cordova_react_test.zip
+COPY ./buildCordovaApp.sh .
+COPY ./dist /app/dist
+
+
+RUN export PATH="$PATH:$(cat /path_add_1):$(cat /path_add_2)" && export ANDROID_HOME="/root/android/sdk" \
+    && unzip -d /tmp/cordova_react_test /app/cordova_react_test.zip \
+    && chmod +x /app/buildCordovaApp.sh && dos2unix /app/buildCordovaApp.sh \
+    && mkdir -p /app/dist/SplitMan21 \
+    && bash /app/buildCordovaApp.sh "SplitMan2"
+
+
+#docker build -t splitman2android -f Dockerfile_android1 .
